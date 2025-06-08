@@ -2,18 +2,42 @@ package main;
 
 import javax.swing.*;
 
-public class Main {
+public class Main extends JFrame{
+    private static int windowWidth = 1000;
+    private static int windowHeight = 600;
+    private static JFrame mainFrame = new JFrame("AdvantureGame");
+    private static StartPanel startPanel = new StartPanel();
+    private static GamePanel gamePanel = new GamePanel();
+    public static GameState gameState = GameState.START;
+
     public static void main (String[] args) {
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.setTitle("Advanture Game");
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setResizable(false);
+        mainFrame.setSize(windowWidth, windowHeight);
+        mainFrame.setLocationRelativeTo(null);
 
-        GamePanel gamePanel = new GamePanel();
-        frame.add(gamePanel);
-        frame.pack();
+        switchGameState();
+    }
 
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+    private static void switchGameState() {
+        mainFrame.getContentPane().removeAll();
+
+        if (gameState == GameState.START) {
+            mainFrame.add(startPanel);
+        }
+
+        if (gameState == GameState.PLAY) {
+            mainFrame.add(gamePanel);
+            gamePanel.requestFocusInWindow();
+        }
+
+        mainFrame.revalidate();
+        mainFrame.repaint();
+        mainFrame.setVisible(true);
+    }
+
+    public static void switchToGamePanel() {
+        gameState = GameState.PLAY;
+        switchGameState();
     }
 }
