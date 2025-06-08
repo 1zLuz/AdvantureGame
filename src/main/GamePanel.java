@@ -8,6 +8,7 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable {
     private final Player player = new Player();
     private final KeyHandler keyHandler = new KeyHandler();
+    private final Image backGroundImage = new ImageIcon("res/tiles/background.png").getImage();
     int FPS = 60;
     Thread thread;
 
@@ -63,8 +64,10 @@ public class GamePanel extends JPanel implements Runnable {
         updatePlayerPosition();
     }
 
-    public void paint(Graphics g) {
+    @Override
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.drawImage(backGroundImage, 0, 0, null);
         player.draw(g);
     }
 }

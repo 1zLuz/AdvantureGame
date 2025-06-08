@@ -7,7 +7,7 @@ public class Player {
     private final int playerWidth = 200;
     private final int playerHeight = 550;
     public int playerX = 0;
-    public int playerY = 300;
+    public int playerY = 470;
     private final int playerSpeed = 10;
     private final Image playerImage;
 
