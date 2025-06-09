@@ -22,15 +22,15 @@ public class GamePanel extends JPanel implements Runnable {
 
     // Block Lists
     // Grass
-    private List<GrassOne> grassOneList = new ArrayList<>();
-    private List<GrassTwo> grassTwoList = new ArrayList<>();
-    private List<GrassThree> grassThreeList = new ArrayList<>();
+    private final List<GrassOne> grassOneList = new ArrayList<>();
+    private final List<GrassTwo> grassTwoList = new ArrayList<>();
+    private final List<GrassThree> grassThreeList = new ArrayList<>();
     // Dirt
-    private List<DirtFour> dirtFourList = new ArrayList<>();
-    private List<DirtFive> dirtFiveList = new ArrayList<>();
-    private List<DirtSix> dirtSixList = new ArrayList<>();
+    private final List<DirtFour> dirtFourList = new ArrayList<>();
+    private final List<DirtFive> dirtFiveList = new ArrayList<>();
+    private final List<DirtSix> dirtSixList = new ArrayList<>();
     // Water
-    private List<WaterEightteen> waterEightteenList = new ArrayList<>();
+    private final List<WaterEightteen> waterEightteenList = new ArrayList<>();
 
     public GamePanel() {
         this.setBackground(Color.BLACK);

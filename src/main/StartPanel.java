@@ -4,10 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class StartPanel extends JPanel {
+    private final Image backGroundImage;
     private final JLabel title = new JLabel("Welcome to the AdventureGame");
     private final JButton startButton = new JButton("Start Game");
 
     public StartPanel() {
+        backGroundImage = new ImageIcon("res/tiles/background.png").getImage();
         createLayout();
         startButtonListener();
     }
@@ -24,6 +26,12 @@ public class StartPanel extends JPanel {
 
         c.gridy = 1;
         this.add(startButton, c);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backGroundImage, 0, 0, null);
     }
 
     private void startButtonListener() {startButton.addActionListener(e -> Main.switchToGamePanel());}
