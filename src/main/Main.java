@@ -40,4 +40,12 @@ public class Main extends JFrame{
         gameState = GameState.PLAY;
         switchGameState();
     }
+
+    public static int getWindowWidth() {
+        return windowWidth;
+    }
+
+    public static int getWindowHeight() {
+        return windowHeight;
+    }
 }
