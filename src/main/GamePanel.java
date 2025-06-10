@@ -12,13 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GamePanel extends JPanel implements Runnable {
-    private final Player player = new Player();
+    private final Player player = new Player(0,(7 * 64) - 100);
     private final KeyHandler keyHandler = new KeyHandler();
     private final Image backGroundImage = new ImageIcon("res/tiles/background.png").getImage();
     private final int FPS = 60;
     private Thread thread;
     public static final int tileSize = 64;
-    private final Camera camera = new Camera((float)64 * 30, (float)64 * 30);
+    private final int mapX = tileSize * 120;
+    private final int mapY = tileSize * 20;
+    private final Camera camera = new Camera(0, 0, mapX, mapY);
 
     // Block Lists
     // Grass
@@ -85,17 +87,29 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void updatePlayerPosition() {
+        int speed = player.getPlayerSpeed();
+        int width = player.getPlayerWidth();
+        int height = player.getPlayerHeight();
+
         if (keyHandler.upPressed) {
-            player.playerY -= player.getPlayerSpeed();
+            if (player.playerY - speed >= 0) {
+                player.playerY -= speed;
+            }
         }
         if (keyHandler.downPressed) {
-            player.playerY += player.getPlayerSpeed();
+            if (player.playerY + height + speed <= mapY) {
+                player.playerY += speed;
+            }
         }
         if (keyHandler.leftPressed) {
-            player.playerX -= player.getPlayerSpeed();
+            if (player.playerX - speed >= 0) {
+                player.playerX -= speed;
+            }
         }
         if (keyHandler.rightPressed) {
-            player.playerX += player.getPlayerSpeed();
+            if (player.playerX + width + speed <= mapX) {
+                player.playerX += speed;
+            }
         }
     }
 

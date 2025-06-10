@@ -10,20 +10,22 @@ import java.awt.*;
 public class Player {
     private final int playerWidth = 200;
     private final int playerHeight = 550;
-    private final int screenX = Main.getWindowWidth() / 2 - (GamePanel.tileSize / 2);
-    private final int screenY = Main.getWindowHeight() / 2 - (GamePanel.tileSize / 2);
     public int playerX = 0;
     public int playerY = 470;
     private final int playerSpeed = 10;
     private final Image playerImage;
 
-    public Player() {
+    public Player(int x, int y) {
         playerImage = new ImageIcon("res/player/playerimage.png").getImage().getScaledInstance(50,100, Image.SCALE_DEFAULT);
+        playerX = x;
+        playerY = y;
     }
 
     public void draw(Graphics g, Camera camera) {
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(playerImage, screenX, screenY, null);
+        int screenX = playerX - (int)camera.getX();
+        int screenY = playerY - (int)camera.getY();
+
+        g.drawImage(playerImage, screenX, screenY, null);
     }
 
     public int getPlayerSpeed() {
