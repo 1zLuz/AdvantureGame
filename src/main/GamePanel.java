@@ -86,21 +86,30 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    private boolean isColliding(Rectangle rectangle) {
+        for (GrassOne grassOne : grassOneList) {
+            if (grassOne.getBounds().intersects(rectangle)) {
+                return true;
+            }
+        }
+        for (GrassTwo grassTwo : grassTwoList) {
+            if (grassTwo.getBounds().intersects(rectangle)) {
+                return true;
+            }
+        }
+        for (GrassThree grassThree : grassThreeList) {
+            if (grassThree.getBounds().intersects(rectangle)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void updatePlayerPosition() {
         int speed = player.getPlayerSpeed();
         int width = player.getPlayerWidth();
         int height = player.getPlayerHeight();
 
-        if (keyHandler.upPressed) {
-            if (player.playerY >= 0) {
-                player.playerY -= speed;
-            }
-        }
-        if (keyHandler.downPressed) {
-            if (player.playerY + height + 30 <= mapY) {
-                player.playerY += speed;
-            }
-        }
         if (keyHandler.leftPressed) {
             if (player.playerX >= 0) {
                 player.playerX -= speed;
@@ -109,6 +118,33 @@ public class GamePanel extends JPanel implements Runnable {
         if (keyHandler.rightPressed) {
             if (player.playerX + width <= mapX) {
                 player.playerX += speed;
+            }
+        }
+        if(keyHandler.spacePressed && player.isOnGround) {
+            player.velocityY = player.getJumpStrength();
+            player.isOnGround = false;
+        }
+        player.velocityY += player.gravity;
+        float nextY = player.playerY + player.velocityY;
+        Rectangle futureBounds = new Rectangle(player.playerX, (int)nextY, width, height);
+        if (player.velocityY > 0) {
+            if (isColliding(futureBounds)) {
+                player.velocityY = 0;
+                player.isOnGround = true;
+
+                while (!isColliding(new Rectangle(player.playerX, player.playerY + 1, width, height))) {
+                    player.playerX += 1;
+                }
+            } else {
+                player.playerY += (int) player.velocityY;
+                player.isOnGround = true;
+            }
+        } else if (player.velocityY < 0) {
+            if (!isColliding(futureBounds)) {
+                player.playerY += (int) player.velocityY;
+                player.isOnGround = false;
+            } else {
+                player.velocityY = 0;
             }
         }
     }

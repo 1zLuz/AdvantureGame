@@ -10,7 +10,11 @@ public class Player {
     private final int playerHeight = 100;
     public int playerX = 0;
     public int playerY = 470;
+    public boolean isOnGround = false;
+    public float gravity = 0.5f;
+    public float velocityY = 0;
     private final int playerSpeed = 10;
+    private final float jumpStrength = -16f;
     private final Image playerImage;
 
     public Player(int x, int y) {
@@ -49,4 +53,6 @@ public class Player {
     public Rectangle getBounds() {
         return new Rectangle(playerX, playerY, playerWidth, playerHeight);
     }
+
+    public float getJumpStrength() { return jumpStrength; }
 }
