@@ -1,15 +1,13 @@
 package entity;
 
 import main.Camera;
-import main.GamePanel;
-import main.Main;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Player {
-    private final int playerWidth = 200;
-    private final int playerHeight = 550;
+    private final int playerWidth = 50;
+    private final int playerHeight = 100;
     public int playerX = 0;
     public int playerY = 470;
     private final int playerSpeed = 10;

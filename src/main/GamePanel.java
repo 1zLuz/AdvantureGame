@@ -92,22 +92,22 @@ public class GamePanel extends JPanel implements Runnable {
         int height = player.getPlayerHeight();
 
         if (keyHandler.upPressed) {
-            if (player.playerY - speed >= 0) {
+            if (player.playerY >= 0) {
                 player.playerY -= speed;
             }
         }
         if (keyHandler.downPressed) {
-            if (player.playerY + height + speed <= mapY) {
+            if (player.playerY + height + 30 <= mapY) {
                 player.playerY += speed;
             }
         }
         if (keyHandler.leftPressed) {
-            if (player.playerX - speed >= 0) {
+            if (player.playerX >= 0) {
                 player.playerX -= speed;
             }
         }
         if (keyHandler.rightPressed) {
-            if (player.playerX + width + speed <= mapX) {
+            if (player.playerX + width <= mapX) {
                 player.playerX += speed;
             }
         }
