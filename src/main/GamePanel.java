@@ -137,7 +137,7 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             } else {
                 player.playerY += (int) player.velocityY;
-                player.isOnGround = true;
+                player.isOnGround = false;
             }
         } else if (player.velocityY < 0) {
             if (!isColliding(futureBounds)) {
