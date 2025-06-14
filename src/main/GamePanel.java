@@ -102,6 +102,24 @@ public class GamePanel extends JPanel implements Runnable {
                 return true;
             }
         }
+
+        for (DirtFour dirtFour : dirtFourList) {
+            if (dirtFour.getBounds().intersects(rectangle)) {
+                return true;
+            }
+        }
+
+        for (DirtFive dirtFive: dirtFiveList) {
+            if (dirtFive.getBounds().intersects(rectangle)) {
+                return true;
+            }
+        }
+
+        for (DirtSix dirtSix: dirtSixList) {
+            if (dirtSix.getBounds().intersects(rectangle)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -147,6 +165,17 @@ public class GamePanel extends JPanel implements Runnable {
                 player.velocityY = 0;
             }
         }
+
+        if (player.playerY > mapY) {
+            player.health = 0;
+        }
+    }
+
+    private boolean checkIfDead() {
+        if (player.health == 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -171,6 +200,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         updatePlayerPosition();
+        checkIfDead();
+        checkGameOver();
         camera.centerOnEntity(player);
     }
 
@@ -208,5 +239,11 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         player.draw(g,camera);
+    }
+
+    public void checkGameOver() {
+        if (checkIfDead()) {
+            Main.switchToGameOverPanel();
+        }
     }
 }

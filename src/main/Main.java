@@ -8,6 +8,7 @@ public class Main extends JFrame{
     private static JFrame mainFrame = new JFrame("AdvantureGame");
     private static StartPanel startPanel = new StartPanel();
     private static GamePanel gamePanel = new GamePanel();
+    private static GameOverPanel gameOverPanel = new GameOverPanel();
     public static GameState gameState = GameState.START;
 
     public static void main (String[] args) {
@@ -31,6 +32,10 @@ public class Main extends JFrame{
             gamePanel.requestFocusInWindow();
         }
 
+        if (gameState == GameState.GAME_OVER) {
+            mainFrame.add(gameOverPanel);
+        }
+
         mainFrame.revalidate();
         mainFrame.repaint();
         mainFrame.setVisible(true);
@@ -38,6 +43,11 @@ public class Main extends JFrame{
 
     public static void switchToGamePanel() {
         gameState = GameState.PLAY;
+        switchGameState();
+    }
+
+    public static void switchToGameOverPanel() {
+        gameState = GameState.GAME_OVER;
         switchGameState();
     }
 

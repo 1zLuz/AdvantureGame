@@ -16,6 +16,7 @@ public class Player {
     private final int playerSpeed = 10;
     private final float jumpStrength = -16f;
     private final Image playerImage;
+    public int health = 100;
 
     public Player(int x, int y) {
         playerImage = new ImageIcon("res/player/playerimage.png").getImage().getScaledInstance(50,100, Image.SCALE_DEFAULT);
